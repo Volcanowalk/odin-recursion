@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <script>
+
+	function fibs(number) {
+		let a, b, c;
+		let array = [];
+		for(let i = 0; i < number; i++){
+			if(i === 0) {
+				array.push(0);
+				a = 0;
+			} else if(i === 1) {
+				array.push(1);
+				b = 1;
+			} else {
+				c = a + b;
+				array.push(c);
+				a = b;
+				b = c;
+			}
+		}
+		return array;
+	}
+
+	function fibsRec(number) {
+		if(number === 0) {
+			return [];
+		} 
+
+		let array = fibsRec(number - 1);
+
+		if(number === 1) {
+			array.push(0);
+			return array;
+		} else if(number === 2){
+			array.push(1);
+			return array;
+		} else {			
+			array.push(array[array.length-2] + array[array.length - 1])
+			return array;
+		}
+	}
+
+	function mergeSort(array) {
+		//If array size is 1
+		if(array.length === 1) {
+			return array;
+		}
+
+		//Split in half
+		let half_point = Math.floor(array.length / 2);
+		let first_half = array.slice(0, half_point)
+		let second_half = array.slice(half_point)
+
+		//Sort the two half arrays
+		let sorted_first = mergeSort(first_half)
+		let sorted_second = mergeSort(second_half)
+
+		//Merge the two sorted arrays
+		let new_sorted = [];
+
+		while(sorted_first.length > 0 && sorted_second.length > 0) {
+			if(sorted_first[0] <= sorted_second[0]) {
+				new_sorted.push(sorted_first[0]);
+				sorted_first.shift();
+			} else {
+				new_sorted.push(sorted_second[0]);
+				sorted_second.shift();
+			}
+		}
+
+		while(sorted_first.length > 0) {
+			new_sorted.push(sorted_first[0]);
+			sorted_first.shift();
+		}
+
+		while(sorted_second.length > 0) {
+			new_sorted.push(sorted_second[0]);
+			sorted_second.shift();
+		}
+
+		return new_sorted;
+	}
+
+	console.log(mergeSort([9,8,7,6,5,4,3,2,1]));
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
